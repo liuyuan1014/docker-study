@@ -1,9 +1,13 @@
 package com.atguigu.spring.ioc;
 
 import com.atguigu.spring.ioc.bean.Car;
+import com.atguigu.spring.ioc.bean.Cat;
 import com.atguigu.spring.ioc.bean.Dog;
 import com.atguigu.spring.ioc.bean.Person;
 import com.atguigu.spring.ioc.controller.UserController;
+import com.atguigu.spring.ioc.dao.DeliveryDao;
+import com.atguigu.spring.ioc.dao.Userdao;
+import com.atguigu.spring.ioc.service.HahaService;
 import com.atguigu.spring.ioc.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,11 +23,66 @@ import java.util.Map;
 
 @SpringBootApplication
 public class Spring01IocApplication {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("======容器创建成功了===");
+        DeliveryDao dao = ioc.getBean(DeliveryDao.class);
+        dao.saveDelivery();
+
+    }
+
+    public static void test11(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("======容器创建成功了===");
+        Dog bean = ioc.getBean(Dog.class);
+        System.out.println(bean);
+
+        Cat bean1 = ioc.getBean(Cat.class);
+        System.out.println("bean1= " + bean1);
+    }
+
+    public static void test10(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=====容器创建好了");
+        HahaService hahaservice = ioc.getBean(HahaService.class);
+        System.out.println("hahaservice = " + hahaservice);
+
+        String osType = hahaservice.getOsType();
+        System.out.println("osType = " + osType);
+    }
+
+    public static void test09(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("容器创建完成");
+        Userdao bean = ioc.getBean(Userdao.class);
+        System.out.println("bean = " + bean);
+    }
+
+    /**
+     *
+     *测试自动注入
+     *
+     * @param args
+     */
+    public static void test08(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("========容器创建完成了===");
+
+        /**
+         * Consider marking one of the beans as @Primary,
+         * updating the consumer to accept multiple beans,
+         * or using @Qualifier to identify the bean that should be consumed
+         */
+        UserService bean = ioc.getBean(UserService.class);
+        System.out.println("bean =" + bean);
+
+    }
     /**
      * 测试自动注入
      * @param args
      */
-    public static <UserControlller> void main(String[] args) {
+    public static <UserControlller> void test07(String[] args) {
         ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
         System.out.println("===容器创建完成====");
 

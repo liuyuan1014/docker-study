@@ -3,10 +3,7 @@ package com.atguigu.spring.ioc.config;
 import com.atguigu.spring.ioc.bean.Person;
 import com.atguigu.spring.ioc.condition.MacCondition;
 import com.atguigu.spring.ioc.condition.WindowsCondition;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 @Configuration //告诉Spring容器，这是一个配置类
 /**
@@ -24,7 +21,9 @@ public class PersonConfig {
     //windows系统： 容器中有bill
     //mac系统： 容器中有 john
 
-    @Conditional(MacCondition.class) //可以标在方法或者类上
+
+    //只有当 MacCondition 条件满足时（即运行在 macOS 系统上），bill Bean 才会被创建。可以标在方法或者类上
+    @Conditional(MacCondition.class)
     @Bean("bill")
     public Person bill() {
         Person person = new Person();
@@ -57,6 +56,8 @@ public class PersonConfig {
         return person;
 
     }
+
+    @Primary //主组件：默认组件
     @Bean("lisi")
     public Person lisi() {
         Person person = new Person();

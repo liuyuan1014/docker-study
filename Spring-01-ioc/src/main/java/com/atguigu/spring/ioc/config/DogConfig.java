@@ -17,4 +17,19 @@ public class DogConfig {
     public Dog dog() {
         return new Dog();
     }
+
+//    @Bean
+//    public Dog dog01() {
+//        Dog dog = new Dog();
+//        dog.setName("大狗");
+//
+//        return dog;
+//    }
+//
+//    @Bean
+//    public Dog dog02() {
+//        Dog dog = new Dog();
+//        dog.setName("二狗");
+//        return dog;
+//    }
 }
